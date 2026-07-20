@@ -3,7 +3,7 @@
 [![CI](https://github.com/kotoba-lang/replicator/actions/workflows/ci.yml/badge.svg)](https://github.com/kotoba-lang/replicator/actions/workflows/ci.yml)
 
 Synthetic data generation + domain randomization — `omni.replicator.core`
-API-compat target. Pure-Clojure `.cljc` port of the Rust `kami-replicator`
+API-compat target. Safety-gated `.kotoba` contract derived from the Rust `kami-replicator`
 crate (`kotoba-lang/kami-engine`), per ADR-2607010930 (clj-wgsl migration
 Phase 4).
 
@@ -13,17 +13,12 @@ either the original Rust crate or this port.
 ## Port scope
 
 The Rust source (`kami-replicator/src/lib.rs`) exports only status
-constants; there was no domain logic to port. This library reproduces those
-constants 1:1 as pure data, plus tests asserting they match:
+constants; there was no domain logic to port. This library preserves those
+values through typed getters compiled for restricted JavaScript and Wasm:
 
 ```clojure
-(require '[kotoba.replicator :as replicator])
-
-replicator/status
-;; => {:adr "ADR-2605261800"
-;;     :phase "R1.0-path-reservation"
-;;     :kami-name "utsushimi"
-;;     :nv-compat-target "omni.replicator.core"}
+(defn kami-name-value [] :string "utsushimi")
+(defn nv-compat-target-value [] :string "omni.replicator.core")
 ```
 
 ## Unported (out of scope)
