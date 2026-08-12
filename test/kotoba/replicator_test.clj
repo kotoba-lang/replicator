@@ -50,7 +50,12 @@
            (mapv #(bit-and (int %) 255) (take 4 (:bytes wasm)))))))
 
 (deftest production-source-authority
-  (is (= ["src/kotoba/replicator.kotoba"]
+  ;; NARROWED, not deleted (ADR 0001 as amended; ADR-2608130900 took the same step in
+  ;; dsl-core and async). src/ is exactly two files: the .kotoba authority and the
+  ;; .cljc load path that kotoba.replicator-parity-test holds equal to it. A third
+  ;; file, or a second .cljc, would be a fork of the authority and still fails here.
+  (is (= ["src/kotoba/replicator.cljc"
+          "src/kotoba/replicator.kotoba"]
          (->> (file-seq (io/file "src"))
               (filter #(.isFile %))
               (map str)
