@@ -1,6 +1,6 @@
 (ns kotoba.replicator-parity-test
   "Parity gate between `src/kotoba/replicator.kotoba` (the semantic authority) and
-  `src/kotoba/replicator.cljc` (the load path a Clojure/ClojureScript consumer
+  `src/kotoba/replicator.cljk` (the load path a Clojure/ClojureScript consumer
   requires).
 
   Shape follows `kotoba-lang/css` (`css.kotoba-parity-test`), `kotoba-lang/dsl-core`
@@ -10,7 +10,7 @@
   test-only dependency.
 
   WHY THE .cljc EXISTS AT ALL. Commit c5e3c158-era migration #1 (`d875a29e`,
-  2026-07-20) deleted `src/kotoba/replicator.cljc` and put the `.kotoba` at that path.
+  2026-07-20) deleted `src/kotoba/replicator.cljk` and put the `.kotoba` at that path.
   A `.kotoba` is not on any Clojure classpath, so `kotoba.replicator` stopped being
   loadable by every runtime this workspace ranks above the native path. The `.cljc`
   restored beside it is the load path; the `.kotoba` remains the authority.
