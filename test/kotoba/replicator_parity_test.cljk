@@ -36,7 +36,7 @@
 
   3. `main` is a wasm entry point, not library API, and is not mirrored (the same
      decision `dsl-core` and `postfx` took)."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [kotoba.compiler.core :as compiler]
             [kotoba.compiler.ir :as ir]
             [kotoba.replicator :as replicator]))
